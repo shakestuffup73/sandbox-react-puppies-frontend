@@ -11,13 +11,12 @@ function App() {
   const navigate = useNavigate()
 
   const handleAddPuppy = async newPuppyData => {
-    setPuppies([...puppies, newPuppyData])
     //formData is newPuppyData...that is being sent
     // send the puppy data to the back end
     const newPuppy = await puppyService.create(newPuppyData)
     // wait for a response
     // set the resulting data in state
-    setPuppies([...setPuppies, newPuppy])
+    setPuppies([...puppies, newPuppy])
     navigate('/')
   }
 
