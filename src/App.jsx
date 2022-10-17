@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Route, Routes, Link } from 'react-router-dom'
+import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import AddPuppy from './pages/AddPuppy/AddPuppy'
+import PuppyList from './pages/PuppyList/PuppyList'
 import * as puppyService from './services/puppyService'
 import './App.css'
 
 function App() {
   const [puppies, setPuppies] = useState([])
+
+  const navigate = useNavigate()
 
   const handleAddPuppy = async newPuppyData => {
     setPuppies([...puppies, newPuppyData])
@@ -15,6 +18,7 @@ function App() {
     // wait for a response
     // set the resulting data in state
     setPuppies([...setPuppies, newPuppy])
+    navigate('/')
   }
 
   useEffect(() => {
@@ -37,6 +41,7 @@ function App() {
       <main>
       <Routes>
         <Route path='/add' element={<AddPuppy handleAddPuppy={handleAddPuppy}/>} />
+        <Route path='/' element={<PuppyList puppies={puppies} />} />
       </Routes>
       </main>
     </div>
