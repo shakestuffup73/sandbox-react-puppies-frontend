@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Route, Routes, Link } from 'react-router-dom'
 import AddPuppy from './pages/AddPuppy/AddPuppy'
 import * as puppyService from './services/puppyService'
@@ -16,6 +16,14 @@ function App() {
     // set the resulting data in state
     setPuppies([...setPuppies, newPuppy])
   }
+
+  useEffect(() => {
+    const fetchAllPuppies = async () => {
+      const puppyData = await puppyService.getAll()
+      setPuppies(puppyData)
+    }
+    fetchAllPuppies()
+  }, [])
 
   return (
     <div className="App">
