@@ -21,8 +21,9 @@ function App() {
     navigate('/')
   }
 
-  const handleDeletePuppy = id => {
-    setPuppies(puppies.filter(puppy => puppy._id !== id))
+  const handleDeletePuppy = async id => {
+    const deletedPuppy = await puppyService.deleteOne(id)
+    setPuppies(puppies.filter(puppy => puppy._id !== deletedPuppy._id))
   }
 
   useEffect(() => {
